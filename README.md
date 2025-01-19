@@ -1,2 +1,0 @@
-# GMS
-Gym Management System
