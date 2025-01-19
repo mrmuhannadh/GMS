@@ -4,7 +4,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      resigtered_users: {
+      registered_user: {
         Row: {
           id:string;
           created_at:string;
@@ -31,7 +31,7 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "registered_users_user_id_fkey";
+            foreignKeyName: "registered_user_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: true;
             referencedRelation: "users";
@@ -100,7 +100,6 @@ export type Database = {
           first_name: string;
           last_name: string;
           title: string;
-
           dob: string;
           contact_no: number;
           address: string;
@@ -142,6 +141,41 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "admin_user_profile_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      notifications: {
+        Row: {
+          id:string;
+          created_at:string;
+          to: string;
+          title: string;
+          description: string;
+          seen: boolean;
+        };
+        Insert: {
+          id?:string;
+          created_at?:string;
+          to?: string;
+          title?: string;
+          description?: string;
+          seen?: boolean;
+        };
+        Update: {
+          id?:string;
+          created_at?:string;
+          to?: string;
+          title?: string;
+          description?: string;
+          seen?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "registered_user_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: true;
             referencedRelation: "users";

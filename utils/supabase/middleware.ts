@@ -1,11 +1,9 @@
+import { USER_ROLES, USER_STATUS } from "@/lib/utils";
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const updateSession = async (request: NextRequest) => {
-  // This `try/catch` block is only here for the interactive tutorial.
-  // Feel free to remove once you have Supabase connected.
   try {
-    // Create an unmodified response
     let response = NextResponse.next({
       request: {
         headers: request.headers,
@@ -35,9 +33,19 @@ export const updateSession = async (request: NextRequest) => {
       },
     );
 
-    // This will refresh session if expired - required for Server Components
-    // https://supabase.com/docs/guides/auth/server-side/nextjs
     const user = await supabase.auth.getUser();
+
+    const { data: regUser, error: regError } = await supabase
+    .from("registered_user")
+    .select("*")
+    .eq("user_id", user?.data.user?.id)
+    .single();
+
+  if (regUser.status !== USER_STATUS.ACTIVE || regUser.user_role === USER_ROLES.PLAYER) {
+    //navigate to forbidden
+    await supabase.auth.signOut()
+    return;
+  }
 
     // protected routes
     if (request.nextUrl.pathname.startsWith("/dashboard") && user.error) {
