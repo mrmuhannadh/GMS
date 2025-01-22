@@ -1,11 +1,7 @@
 import { signOutAction } from "@/app/actions";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
+  NavigationMenuItem
 } from "@/components/ui/navigation-menu";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
@@ -18,13 +14,11 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  console.log(user);
   return user ? (
     <div className="flex w-full items-center justify-between gap-4 ">
       <NavigationMenu>
-        <NavigationMenuItem>GYM 28
-          
-        </NavigationMenuItem>
+        <NavigationMenuItem>GYM 28</NavigationMenuItem>
       </NavigationMenu>
       <div>
         <ThemeSwitcher />

@@ -1,10 +1,9 @@
 "use server";
 
-import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
+import { encodedRedirect } from "@/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { toast } from "sonner"
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -51,7 +50,8 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
-    toast.error(error.message)
+    console.log(error)
+    // toast.error(error.message)
     return encodedRedirect("error", "/sign-in", error.message);
   }
 

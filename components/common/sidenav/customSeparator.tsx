@@ -5,15 +5,16 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
 
 export function BreadcrumbWithCustomSeparator() {
   const pathName = usePathname();
 
-  const currentPath = pathName.split("/");
+  // Split the path and filter out any empty strings (e.g., leading slash)
+  const currentPath = pathName.split("/").filter((path) => path !== "");
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -22,11 +23,16 @@ export function BreadcrumbWithCustomSeparator() {
 
           return (
             <BreadcrumbItem key={index}>
-              <BreadcrumbLink className={isLastItem ? "bold" : ""}>
-                {/* <Link href="/components">Components</Link> */}
-                {item}
-              </BreadcrumbLink>
-              {!isLastItem && <BreadcrumbSeparator />}
+              {!isLastItem ? (
+                <BreadcrumbLink
+                  href={`/${currentPath.slice(0, index + 1).join("/")}`}
+                >
+                  {decodeURIComponent(item)}
+                </BreadcrumbLink>
+              ) : (
+                <span className="font-bold">{decodeURIComponent(item)}</span>
+              )}
+              {!isLastItem && <BreadcrumbSeparator>/</BreadcrumbSeparator>}
             </BreadcrumbItem>
           );
         })}

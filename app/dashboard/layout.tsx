@@ -1,9 +1,5 @@
-import AdminSideNav from "@/components/common/sidenav/adminSideNav";
-import { BreadcrumbWithCustomSeparator } from "@/components/common/sidenav/customSeparator";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { USER_STATUS } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
-import { Separator } from "@radix-ui/react-separator";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
@@ -32,18 +28,8 @@ export default async function DashboardLayout({
   }
 
   return (
-    <SidebarProvider className="flex flex-row items-start w-full">
-      <AdminSideNav />
-      <main className="flex overflow-x-hidden min-h-screen">
-        <div className="flex flex-col items-start flex-1">
-          <div className="flex items-center">
-            <SidebarTrigger className="m-1" />
-            <Separator orientation="vertical" className="my-4" />
-            {/* <BreadcrumbWithCustomSeparator /> */}
-          </div>
-          <div className="p-4 w-full">{children}</div>
-        </div>
-      </main>
-    </SidebarProvider>
+    <main className="flex overflow-x-hidden min-h-screen items-start px-4">
+      {children}
+    </main>
   );
 }
