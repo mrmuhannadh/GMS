@@ -32,18 +32,18 @@ export default async function DashboardLayout({
   }
 
   return (
-    <main className="flex overflow-x-hidden min-h-screen">
-      <SidebarProvider className="flex flex-row items-start w-full">
-        <AdminSideNav />
+    <SidebarProvider className="flex flex-row items-start w-full">
+      <AdminSideNav />
+      <main className="flex overflow-x-hidden min-h-screen">
         <div className="flex flex-col items-start flex-1">
           <div className="flex items-center">
             <SidebarTrigger className="m-1" />
             <Separator orientation="vertical" className="my-4" />
-            <BreadcrumbWithCustomSeparator />
+            {/* <BreadcrumbWithCustomSeparator /> */}
           </div>
           <div className="p-4 w-full">{children}</div>
         </div>
-      </SidebarProvider>
-    </main>
+      </main>
+    </SidebarProvider>
   );
 }

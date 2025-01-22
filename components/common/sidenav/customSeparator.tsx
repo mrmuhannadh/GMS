@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 export function BreadcrumbWithCustomSeparator() {
   const pathName = usePathname();
-  console.log("***", pathName.trim());
+
   const currentPath = pathName.split("/");
   return (
     <Breadcrumb>
