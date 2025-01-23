@@ -41,7 +41,7 @@ export const updateSession = async (request: NextRequest) => {
     .eq("user_id", user?.data.user?.id)
     .single();
 
-  if (regUser.status !== USER_STATUS.ACTIVE || regUser.user_role === USER_ROLES.SUPER_ADMINISTRATOR) {
+  if (regUser.status !== USER_STATUS.ACTIVE || regUser.user_role === USER_ROLES.MEMBER) {
     //navigate to forbidden
     await supabase.auth.signOut()
     return;

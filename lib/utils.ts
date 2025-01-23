@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export enum USER_ROLES {
   SUPER_ADMINISTRATOR = "SUPER_ADMINISTRATOR",
-  PLAYER = "PLAYER",
+  MEMBER = "MEMBER",
   TRAINEE = "TRAINEE"
 }
 

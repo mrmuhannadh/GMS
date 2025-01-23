@@ -1,10 +1,32 @@
+"use client";
+
+import { USER_ROLES } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
+
 const OverviewCards = () => {
+  const supabase = createClient();
+
+  const [totalMembersCount, setTotalMemebersCount] = useState<Number>(0);
+  const getMembers = async () => {
+    const res = await supabase
+      .from("registered_user")
+      .select()
+      .eq("user_role", USER_ROLES.MEMBER);
+
+    setTotalMemebersCount(res.data?.length ?? 0);
+  };
+
+  useEffect(() => {
+    getMembers();
+  }, []);
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div className="rounded-xl border bg-card text-card-foreground shadow">
         <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="tracking-tight text-sm font-medium">
-            Total Revenue
+            Total Members
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,10 +42,10 @@ const OverviewCards = () => {
           </svg>
         </div>
         <div className="p-6 pt-0">
-          <div className="text-2xl font-bold">$45,231.89</div>
-          <p className="text-xs text-muted-foreground">
-            +20.1% from last month
-          </p>
+          <div className="text-2xl font-bold">
+            {totalMembersCount.toLocaleString()}
+          </div>
+          <p className="text-xs text-muted-foreground">Total Memebrs count</p>
         </div>
       </div>
       <div className="rounded-xl border bg-card text-card-foreground shadow">
