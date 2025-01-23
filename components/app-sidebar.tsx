@@ -8,7 +8,7 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2
+  Settings2,
 } from "lucide-react";
 import * as React from "react";
 
@@ -21,7 +21,7 @@ import {
   SidebarHeader,
   SidebarMenuItem,
   SidebarMenuSubItem,
-  SidebarRail
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -36,9 +36,10 @@ import {
   SidebarMenu,
   SidebarMenuBadge,
   SidebarMenuButton,
-  SidebarMenuSub
+  SidebarMenuSub,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // This is sample data.
 const data = {
@@ -171,6 +172,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const path = usePathname();
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -179,7 +182,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         {/* <NavMain items={data.navMain} /> */}
         {/* <NavProjects projects={data.projects} /> */}
-        <SidebarMenuItem>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
