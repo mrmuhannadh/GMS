@@ -1,14 +1,12 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import TopNav from "@/components/common/topNav";
-import {
-  SidebarInset,
-  SidebarProvider
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { createClient } from "@/utils/supabase/server";
 import { ThemeProvider } from "next-themes";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { BreadcrumbWithCustomSeparator } from "@/components/common/sidenav/customSeparator";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -50,6 +48,7 @@ export default async function RootLayout({
               {user && <AppSidebar />}
               <SidebarInset>
                 <TopNav />
+
                 <div className="w-full flex flex-col  ">
                   {/* <div className="flex flex-col "> */}
                   {children}

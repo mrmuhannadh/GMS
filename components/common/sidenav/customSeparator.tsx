@@ -16,7 +16,7 @@ export function BreadcrumbWithCustomSeparator() {
   const currentPath = pathName.split("/").filter((path) => path !== "");
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="mb-4">
       <BreadcrumbList>
         {currentPath.map((item, index) => {
           const isLastItem = index === currentPath.length - 1;

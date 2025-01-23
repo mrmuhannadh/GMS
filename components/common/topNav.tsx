@@ -18,11 +18,10 @@ const TopNav: React.FC = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 pt-2">
+    <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
       {user ? (
-        <div className="flex items-center gap-2 px-4">
+        <div className="flex  w-full items-center gap-2 px-4 justify-between">
           <SidebarTrigger className="-ml-1" />
-          <BreadcrumbWithCustomSeparator />
 
           <div className="flex w-full items-center justify-between gap-4 ">
             <NavigationMenu>
@@ -37,7 +36,7 @@ const TopNav: React.FC = async () => {
           </div>
         </div>
       ) : (
-        <div className="flex gap-4 w-full items-end justify-end mr-2">
+        <div className="flex gap-4 w-full items-end justify-end mr-2 pt-2">
           <ThemeSwitcher />
           <Button asChild size="sm" variant={"outline"}>
             <Link href="/sign-in">Sign in</Link>

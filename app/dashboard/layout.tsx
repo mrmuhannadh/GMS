@@ -1,3 +1,4 @@
+import { BreadcrumbWithCustomSeparator } from "@/components/common/sidenav/customSeparator";
 import { USER_STATUS } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -29,7 +30,11 @@ export default async function DashboardLayout({
 
   return (
     <main className="flex overflow-x-hidden min-h-screen items-start px-4">
-      {children}
+      <div className="w-full">
+        <BreadcrumbWithCustomSeparator />
+
+        {children}
+      </div>
     </main>
   );
 }

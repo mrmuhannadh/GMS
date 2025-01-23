@@ -1,30 +1,44 @@
-"use client"
+"use client";
 
 import {
   AudioWaveform,
   BookOpen,
-  Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react"
-import * as React from "react"
+  Settings2
+} from "lucide-react";
+import * as React from "react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavUser } from "@/components/nav-user";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+  SidebarMenuItem,
+  SidebarMenuSubItem,
+  SidebarRail
+} from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@radix-ui/react-collapsible";
+import { DirectNotification, Home, People, Setting } from "iconsax-react";
+
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuSub
+} from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -52,9 +66,9 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: Home,
       isActive: true,
       items: [
         {
@@ -74,7 +88,7 @@ const data = {
     {
       title: "Models",
       url: "#",
-      icon: Bot,
+      icon: People,
       items: [
         {
           title: "Genesis",
@@ -154,7 +168,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -163,13 +177,95 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        {/* <NavMain items={data.navMain} /> */}
+        {/* <NavProjects projects={data.projects} /> */}
+        <SidebarMenuItem>
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem
+                className={`flex h-12 border rounded-lg p-4 items-center `}
+              >
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard">
+                    <Home
+                      color="#eee"
+                      variant={path === "/dashboard" ? "Bulk" : "Outline"}
+                      size={54}
+                    />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem
+                className={`flex h-12 border rounded-lg p-4 items-center ${path === "/notifications" ? "bg-" : ""} `}
+              >
+                <SidebarMenuButton asChild>
+                  <Link href="/inbox">
+                    <DirectNotification
+                      color="#eee"
+                      variant={path === "/inbox" ? "Bulk" : "Outline"}
+                      size={54}
+                    />
+                    <span>Inbox</span>
+                  </Link>
+                </SidebarMenuButton>
+                <SidebarMenuBadge>24</SidebarMenuBadge>
+              </SidebarMenuItem>
+
+              <Collapsible className="group/collapsible">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <div
+                      className={`flex h-12 border rounded-lg p-4 items-center ${path === "/notifications" ? "bg-" : ""} `}
+                    >
+                      <SidebarMenuButton>
+                        <Setting
+                          color="#eee"
+                          variant={path === "/settings" ? "Bulk" : "Outline"}
+                          size={54}
+                        />
+                        <span>Settings</span>
+                      </SidebarMenuButton>
+                    </div>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem className="h-12  border-b rounded-lg p-4 items-center w-full">
+                        <Link href="/dashboard/permissions">Permissions</Link>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem className="h-12  border-b rounded-lg p-4 items-center w-full">
+                        <Link href="/dashboard/users">Users</Link>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem className="h-12  border-b rounded-lg p-4 items-center w-full">
+                        <Link href="/notifications">Notifications</Link>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+
+              {/* {items.map((item) => (
+                <SidebarMenuItem
+                  key={item.title}
+                  className={`flex h-12 border rounded-lg p-4 items-center ${path === item.path ? "bg-red-200" : ""} `}
+                >
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon color="red" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))} */}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

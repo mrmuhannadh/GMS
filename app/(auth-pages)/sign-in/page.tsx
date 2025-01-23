@@ -10,10 +10,10 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
 
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="grid p-0 md:grid-cols-2">
+    <Card className="overflow-hidden w-3/5">
+      <CardContent className="grid p-0 md:grid-cols-2 ">
         <form className="p-6 md:p-8">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-2xl font-bold">Welcome back</h1>
               <p className="text-balance text-muted-foreground">
@@ -26,7 +26,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="m@example.com"
+                placeholder="mail@example.com"
                 required
               />
             </div>
