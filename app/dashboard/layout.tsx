@@ -29,7 +29,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <main className="flex overflow-x-hidden min-h-screen items-start px-4">
+    <main className="flex overflow-x-hidden min-h-screen items-start">
       <div className="w-full">
         <BreadcrumbWithCustomSeparator />
 

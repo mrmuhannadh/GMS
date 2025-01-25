@@ -49,7 +49,7 @@ export default async function RootLayout({
               <SidebarInset>
                 <TopNav />
 
-                <div className="w-full flex flex-col  ">
+                <div className="w-full flex flex-col px-4 ">
                   {/* <div className="flex flex-col "> */}
                   {children}
                   {/* </div> */}
